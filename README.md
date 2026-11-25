@@ -52,13 +52,19 @@ La lista, el detalle y el formulario observan sus estados con `collectAsStateWit
 
 ## Capturas
 
+Pantallas de la rama `mejora-ia`, capturadas en el emulador Android.
+
 | Lista | Detalle | Filtro por usuario |
 | :---: | :---: | :---: |
-| <img src="docs/capturas/lista.png" alt="Lista de publicaciones con tarjetas y filtros" width="230"> | <img src="docs/capturas/detalle.png" alt="Detalle de una publicación con cinco comentarios" width="230"> | <img src="docs/capturas/filtro.png" alt="Lista filtrada con el chip Usuario 2 seleccionado" width="230"> |
+| <img src="docs/capturas/lista.png" alt="Lista de publicaciones con buscador y filtros" width="230"> | <img src="docs/capturas/detalle.png" alt="Detalle de una publicación con el botón Eliminar y cinco comentarios" width="230"> | <img src="docs/capturas/filtro.png" alt="Lista filtrada con el chip Usuario 2 seleccionado" width="230"> |
 
 | Crear publicación | Error de conexión |
 | :---: | :---: |
 | <img src="docs/capturas/crear.png" alt="Formulario con confirmación Publicado con id 101" width="230"> | <img src="docs/capturas/error-conexion.png" alt="Error sin conexión y botón Reintentar" width="230"> |
+
+| Búsqueda por título | Paginación |
+| :---: | :---: |
+| <img src="docs/capturas/busqueda.png" alt="Resultado de la búsqueda de una publicación por su título" width="230"> | <img src="docs/capturas/paginacion.png" alt="Botón Cargar más al final de la primera página de publicaciones" width="230"> |
 
 ## Verificación de la Fase 1
 
