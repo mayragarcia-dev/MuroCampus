@@ -4,6 +4,10 @@
     <string name="etiqueta_usuario">Usuario %1$d</string>
     <string name="filtro_todos">Todos</string>
     <string name="sin_publicaciones">Sin publicaciones</string>
+    <string name="buscar_por_titulo">Buscar por título</string>
+    <string name="sin_coincidencias">Sin coincidencias en las publicaciones cargadas</string>
+    <string name="cargar_mas">Cargar más</string>
+    <string name="cargando_mas">Cargando más…</string>
     <string name="cargando_publicaciones">Cargando publicaciones…</string>
     <string name="cargando_detalle">Cargando publicación…</string>
     <string name="comentarios_total">Comentarios (%1$d)</string>
@@ -14,4 +18,7 @@
     <string name="publicar">Publicar</string>
     <string name="publicando">Publicando…</string>
     <string name="publicado_con_id">Publicado con id %1$d</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="eliminando">Eliminando…</string>
+    <string name="publicacion_eliminada">Publicación eliminada correctamente</string>
 </resources>
