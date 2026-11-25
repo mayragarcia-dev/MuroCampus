@@ -60,7 +60,7 @@ Pantallas de la rama `mejora-ia`, capturadas en el emulador Android.
 
 | Crear publicación | Error de conexión |
 | :---: | :---: |
-| <img src="docs/capturas/crear.png" alt="Formulario con confirmación Publicado con id 101" width="230"> | <img src="docs/capturas/error-conexion.png" alt="Error sin conexión y botón Reintentar" width="230"> |
+| <img src="docs/capturas/crear.png" alt="Formulario para crear una publicación con los campos Título y Contenido" width="230"> | <img src="docs/capturas/error-conexion.png" alt="Error sin conexión y botón Reintentar" width="230"> |
 
 | Búsqueda por título | Paginación |
 | :---: | :---: |
