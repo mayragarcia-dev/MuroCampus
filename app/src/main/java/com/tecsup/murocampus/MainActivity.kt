@@ -11,17 +11,26 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.saveable.rememberSaveableStateHolder
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tecsup.murocampus.data.PostRepositoryRemote
 import com.tecsup.murocampus.data.remote.RetrofitClient
+import com.tecsup.murocampus.ui.PantallaCrear
 import com.tecsup.murocampus.ui.PantallaDetalle
 import com.tecsup.murocampus.ui.PantallaLista
 import com.tecsup.murocampus.ui.theme.MuroCampusTheme
@@ -41,8 +50,12 @@ class MainActivity : ComponentActivity() {
             MuroCampusTheme {
                 val idSeleccionado by vm.idSeleccionado.collectAsStateWithLifecycle()
                 val estadoLista = rememberLazyListState()
+                var mostrandoCrear by rememberSaveable { mutableStateOf(false) }
+                val estadoFormulario = rememberSaveableStateHolder()
                 val id = idSeleccionado
-                BackHandler(enabled = id != null, onBack = vm::cerrarDetalle)
+                BackHandler(enabled = mostrandoCrear || id != null) {
+                    if (mostrandoCrear) mostrandoCrear = false else vm.cerrarDetalle()
+                }
 
                 Scaffold(
                     topBar = {
@@ -53,13 +66,32 @@ class MainActivity : ComponentActivity() {
                                 titleContentColor = MaterialTheme.colorScheme.onPrimary
                             )
                         )
+                    },
+                    floatingActionButton = {
+                        if (id == null && !mostrandoCrear) {
+                            val descripcion = stringResource(R.string.crear_publicacion)
+                            FloatingActionButton(
+                                onClick = { mostrandoCrear = true },
+                                modifier = Modifier.semantics { contentDescription = descripcion },
+                                containerColor = MaterialTheme.colorScheme.primary,
+                                contentColor = MaterialTheme.colorScheme.onPrimary
+                            ) {
+                                Text(
+                                    text = "+",
+                                    modifier = Modifier.clearAndSetSemantics {},
+                                    style = MaterialTheme.typography.headlineSmall
+                                )
+                            }
+                        }
                     }
                 ) { padding ->
                     val contenido = Modifier.padding(padding)
-                    if (id == null) {
-                        PantallaLista(vm, estadoLista, vm::abrir, contenido)
-                    } else {
-                        PantallaDetalle(vm, id, contenido)
+                    when {
+                        mostrandoCrear -> estadoFormulario.SaveableStateProvider("crear") {
+                            PantallaCrear(vm, contenido)
+                        }
+                        id != null -> PantallaDetalle(vm, id, contenido)
+                        else -> PantallaLista(vm, estadoLista, vm::abrir, contenido)
                     }
                 }
             }

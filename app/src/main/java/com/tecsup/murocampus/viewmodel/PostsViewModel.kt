@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tecsup.murocampus.data.PostRepository
 import com.tecsup.murocampus.model.Comentario
+import com.tecsup.murocampus.model.NuevoPost
 import com.tecsup.murocampus.model.Post
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
@@ -29,6 +30,9 @@ class PostsViewModel(private val repo: PostRepository) : ViewModel() {
 
     private val _idSeleccionado = MutableStateFlow<Int?>(null)
     val idSeleccionado: StateFlow<Int?> = _idSeleccionado.asStateFlow()
+
+    private val _publicacion = MutableStateFlow<UiState<Post>?>(null)
+    val publicacion: StateFlow<UiState<Post>?> = _publicacion.asStateFlow()
 
     private var carga: Job? = null
     private var cargaDetalle: Job? = null
@@ -80,5 +84,20 @@ class PostsViewModel(private val repo: PostRepository) : ViewModel() {
     fun cerrarDetalle() {
         cargaDetalle?.cancel()
         _idSeleccionado.value = null
+    }
+
+    fun publicar(titulo: String, texto: String) {
+        if (titulo.isBlank() || texto.isBlank() || _publicacion.value == UiState.Cargando) return
+
+        _publicacion.value = UiState.Cargando
+        viewModelScope.launch {
+            repo.crear(NuevoPost(userId = 1, title = titulo, body = texto))
+                .onSuccess { _publicacion.value = UiState.Exito(it) }
+                .onFailure { _publicacion.value = UiState.Error(mensajeDe(it)) }
+        }
+    }
+
+    fun limpiarConfirmacion() {
+        if (_publicacion.value is UiState.Exito) _publicacion.value = null
     }
 }

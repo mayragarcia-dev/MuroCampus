@@ -8,4 +8,10 @@
     <string name="cargando_detalle">Cargando publicación…</string>
     <string name="comentarios_total">Comentarios (%1$d)</string>
     <string name="reintentar">Reintentar</string>
+    <string name="crear_publicacion">Crear publicación</string>
+    <string name="titulo_publicacion">Título</string>
+    <string name="contenido_publicacion">Contenido</string>
+    <string name="publicar">Publicar</string>
+    <string name="publicando">Publicando…</string>
+    <string name="publicado_con_id">Publicado con id %1$d</string>
 </resources>
