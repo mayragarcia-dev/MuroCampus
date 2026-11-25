@@ -7,7 +7,10 @@ import androidx.compose.ui.graphics.Color
 
 private val MuroCampusColors = lightColorScheme(
     primary = Color(0xFF176B9B),
-    onPrimary = Color.White
+    onPrimary = Color.White,
+    primaryContainer = Color(0xFFD8EBF7),
+    onPrimaryContainer = Color(0xFF104967),
+    surfaceVariant = Color(0xFFEDF2F7)
 )
 
 @Composable
