@@ -3,6 +3,7 @@ package com.tecsup.murocampus.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tecsup.murocampus.data.PostRepository
+import com.tecsup.murocampus.data.mensajeDe
 import com.tecsup.murocampus.model.Comentario
 import com.tecsup.murocampus.model.NuevoPost
 import com.tecsup.murocampus.model.Post
