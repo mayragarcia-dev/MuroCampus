@@ -1,5 +1,6 @@
 package com.tecsup.murocampus.ui
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -63,14 +64,17 @@ fun TarjetaPost(post: Post, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Cargando(modifier: Modifier = Modifier) {
+fun Cargando(
+    modifier: Modifier = Modifier,
+    @StringRes mensaje: Int = R.string.cargando_publicaciones
+) {
     Box(modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             CircularProgressIndicator()
-            Text(stringResource(R.string.cargando_publicaciones))
+            Text(stringResource(mensaje))
         }
     }
 }

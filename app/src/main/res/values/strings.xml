@@ -3,5 +3,7 @@
     <string name="app_name">MuroCampus</string>
     <string name="etiqueta_usuario">Usuario %1$d</string>
     <string name="cargando_publicaciones">Cargando publicaciones…</string>
+    <string name="cargando_detalle">Cargando publicación…</string>
+    <string name="comentarios_total">Comentarios (%1$d)</string>
     <string name="reintentar">Reintentar</string>
 </resources>
