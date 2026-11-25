@@ -60,10 +60,16 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     topBar = {
                         TopAppBar(
-                            title = { Text(stringResource(R.string.app_name)) },
+                            title = {
+                                Text(
+                                    text = stringResource(R.string.app_name),
+                                    fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                                    style = MaterialTheme.typography.titleLarge
+                                )
+                            },
                             colors = TopAppBarDefaults.topAppBarColors(
                                 containerColor = MaterialTheme.colorScheme.primary,
-                                titleContentColor = MaterialTheme.colorScheme.onPrimary
+                                titleContentColor = androidx.compose.ui.graphics.Color.White
                             )
                         )
                     },

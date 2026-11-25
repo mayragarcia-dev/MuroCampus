@@ -80,7 +80,15 @@ fun PantallaLista(
                     },
                     colors = FilterChipDefaults.filterChipColors(
                         selectedContainerColor = MaterialTheme.colorScheme.primary,
-                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary
+                        selectedLabelColor = androidx.compose.ui.graphics.Color.White,
+                        containerColor = androidx.compose.ui.graphics.Color.White,
+                        labelColor = MaterialTheme.colorScheme.primary
+                    ),
+                    border = FilterChipDefaults.filterChipBorder(
+                        enabled = true,
+                        selected = seleccionado,
+                        borderColor = MaterialTheme.colorScheme.primary,
+                        selectedBorderColor = MaterialTheme.colorScheme.primary
                     )
                 )
             }

@@ -1,14 +1,19 @@
 package com.tecsup.murocampus.ui
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -27,6 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -56,7 +62,7 @@ fun PantallaCrear(vm: PostsViewModel, modifier: Modifier = Modifier) {
             .verticalScroll(rememberScrollState())
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         OutlinedTextField(
             value = titulo,
@@ -85,20 +91,31 @@ fun PantallaCrear(vm: PostsViewModel, modifier: Modifier = Modifier) {
                 focus.clearFocus()
                 vm.publicar(titulo, contenido)
             },
-            enabled = !enviando && titulo.isNotBlank() && contenido.isNotBlank()
+            enabled = !enviando && titulo.isNotBlank() && contenido.isNotBlank(),
+            shape = CircleShape,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = Color.White
+            ),
+            contentPadding = PaddingValues(horizontal = 40.dp, vertical = 12.dp)
         ) {
-            Text(stringResource(if (enviando) R.string.publicando else R.string.publicar))
+            Text(
+                text = stringResource(if (enviando) R.string.publicando else R.string.publicar),
+                fontWeight = FontWeight.Bold
+            )
         }
         when (val actual = estado) {
             is UiState.Exito -> AvisoPublicacion(
                 mensaje = stringResource(R.string.publicado_con_id, actual.datos.id),
-                fondo = Color(0xFFE4F3E8),
-                texto = Color(0xFF195C37)
+                fondo = Color(0xFFE6F4EA),
+                texto = Color(0xFF137333),
+                borde = Color(0xFF34A853)
             )
             is UiState.Error -> AvisoPublicacion(
                 mensaje = actual.mensaje,
                 fondo = MaterialTheme.colorScheme.errorContainer,
-                texto = MaterialTheme.colorScheme.onErrorContainer
+                texto = MaterialTheme.colorScheme.onErrorContainer,
+                borde = MaterialTheme.colorScheme.error
             )
             UiState.Cargando, null -> Unit
         }
@@ -106,19 +123,21 @@ fun PantallaCrear(vm: PostsViewModel, modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun AvisoPublicacion(mensaje: String, fondo: Color, texto: Color) {
+private fun AvisoPublicacion(mensaje: String, fondo: Color, texto: Color, borde: Color) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .semantics { liveRegion = LiveRegionMode.Polite },
         color = fondo,
         contentColor = texto,
-        shape = MaterialTheme.shapes.medium
+        shape = RoundedCornerShape(12.dp),
+        border = BorderStroke(1.dp, borde)
     ) {
         Text(
             text = mensaje,
-            modifier = Modifier.padding(12.dp),
-            style = MaterialTheme.typography.labelLarge,
+            modifier = Modifier.padding(14.dp),
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center
         )
     }
