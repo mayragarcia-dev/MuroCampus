@@ -54,6 +54,24 @@ private val comentariosEspanol = listOf(
     "Quedó muy claro el comunicado, ¡éxitos a todos los participantes!"
 )
 
+private val emailsEspanol = listOf(
+    "carlos.garcia@tecsup.edu.pe",
+    "maria.lopez@tecsup.edu.pe",
+    "juan.perez@tecsup.edu.pe",
+    "ana.torres@tecsup.edu.pe",
+    "luis.mendoza@tecsup.edu.pe",
+    "sofia.ramirez@tecsup.edu.pe"
+)
+
+private val nombresEspanol = listOf(
+    "Carlos García",
+    "María López",
+    "Juan Pérez",
+    "Ana Torres",
+    "Luis Mendoza",
+    "Sofía Ramírez"
+)
+
 private fun traducirPost(post: Post): Post {
     if (post.title.contains("publicación", ignoreCase = true) || post.body.contains("MuroCampus", ignoreCase = true)) {
         return post
@@ -68,7 +86,9 @@ private fun traducirPost(post: Post): Post {
 private fun traducirComentario(comentario: Comentario): Comentario {
     val idx = (comentario.id - 1).coerceAtLeast(0)
     val texto = comentariosEspanol[idx % comentariosEspanol.size]
-    return comentario.copy(body = texto)
+    val email = emailsEspanol[idx % emailsEspanol.size]
+    val nombre = nombresEspanol[idx % nombresEspanol.size]
+    return comentario.copy(name = nombre, email = email, body = texto)
 }
 
 class PostRepositoryRemote(private val api: PostApi) : PostRepository {
